@@ -1,0 +1,70 @@
+.mapContainer {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.streetView {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.scoreModal {
+  width: 90%;
+  max-width: 600px;
+}
+
+.scoreTitle {
+  font-size: 1.2rem;
+  font-weight: bolder;
+}
+
+.extraLink {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.resultMap {
+  width: 100%;
+  height: 300px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.payNowButton {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.termsAgreement {
+  font-size: 0.8rem;
+  padding-top: 15px;
+}
+
+.demoDisclaimer {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-left: 3px solid var(--color-highlight);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}

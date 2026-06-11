@@ -1,0 +1,25 @@
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
+}
+
+.uploadWrapper {
+  display: inline-flex;
+}
+
+.summaryWrapper {
+  width: 100%;
+  text-align: left;
+}
+
+label:has(+ .visuallyHidden:focus-visible) {
+  outline: 2px solid var(--color-text);
+  border-radius: 4px;
+}

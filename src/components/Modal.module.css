@@ -1,0 +1,139 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(from var(--color-surface-alt) r g b / 50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modalContent {
+  background: var(--color-background);
+  padding: 30px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+  color: var(--color-text);
+  box-shadow: 0 2px 8px rgb(from var(--color-background) r g b / 80%);
+  box-sizing: border-box;
+}
+
+.modalContentWide {
+  width: min(480px, calc(100% - 32px));
+  max-width: 90vw;
+  text-align: left;
+}
+
+.modalContent p, .modalContentWide p {
+  margin: 0 0 1rem;
+}
+
+.modalContent p:last-child, .modalContentWide p:last-child {
+  margin-bottom: 0;
+}
+
+.radioGroup {
+  border: none;
+  margin: 1rem 0;
+  padding: 0;
+}
+
+.radioGroupLegend {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.radioOptions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.radioLabel {
+  flex: 1;
+  min-width: 120px;
+  border: 1px solid var(--color-surface-alt);
+  border-radius: 999px;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.radioLabelActive {
+  border-color: var(--color-highlight);
+  background-color: rgb(from var(--color-highlight) r g b / 20%);
+  font-weight: 600;
+}
+
+.radioInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radioText {
+  font-size: 0.95rem;
+}
+
+.radioInput:focus-visible + .radioText {
+  outline: 2px solid var(--color-highlight);
+  outline-offset: 2px;
+  border-radius: 999px;
+}
+
+.modalButton {
+  width: 100%;
+  padding: 10px 16px;
+  border: 0px solid var(--color-highlight);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+  transition: background 0.2s ease-in-out;
+  box-shadow: 0 0 4px rgb(from var(--color-highlight) r g b / 30%);
+}
+
+.modalButton:hover:enabled {
+  background-color: var(--color-highlight);
+}
+
+.dangerButton {
+  background-color: var(--color-red);
+  color: #fff;
+  box-shadow: 0 0 6px rgb(from var(--color-red) r g b / 40%);
+}
+
+.dangerButton:hover:enabled {
+  background-color: var(--color-red-hover);
+}
+
+.modalButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: 0 0 0px;
+}
+
+.cancelButton {
+  margin-top: 16px;
+}
+
+.errorText {
+  margin-top: 12px;
+  margin-bottom: 16px;
+  color: var(--color-red);
+  font-size: 14px;
+}

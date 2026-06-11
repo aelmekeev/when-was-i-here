@@ -1,0 +1,35 @@
+.yesButton,
+.noButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  position: relative;
+  display: inline-block;
+}
+
+.yesButton::after,
+.noButton::after {
+  content: '';
+  position: absolute;
+  inset-block: -15px;
+  inset-inline: -15px;
+}
+
+.yesButton {
+  background-color: var(--color-green);
+}
+
+.yesButton:hover {
+  background-color: var(--color-green-hover);
+}
+
+.noButton {
+  background-color: var(--color-red);
+}
+
+.noButton:hover {
+  background-color: var(--color-red-hover);
+}

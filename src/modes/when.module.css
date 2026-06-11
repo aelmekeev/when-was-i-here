@@ -1,0 +1,53 @@
+.guessButton {
+  align-self: end;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid var(--color-surface-alt);
+  background-color: var(--color-surface-alt);
+  color: var(--color-text);
+  margin-left: 20px;
+  white-space: nowrap;
+}
+
+.guessButton:hover {
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.choiceGrid {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 16px 32px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 12px 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+}
+
+.choiceButton {
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--color-surface-alt);
+  background-color: var(--color-surface-alt);
+  color: var(--color-text);
+  cursor: pointer;
+  white-space: nowrap;
+  min-width: 140px;
+}
+
+.choiceButton:hover {
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.choiceSelected {
+  background-color: var(--color-orange);
+}

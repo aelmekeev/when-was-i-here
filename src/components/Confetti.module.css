@@ -1,0 +1,41 @@
+.overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  overflow: hidden;
+}
+
+.piece {
+  position: absolute;
+  top: -12vh;
+  left: var(--confetti-left);
+  width: 0.5rem;
+  height: 1.2rem;
+  border-radius: 0.25rem;
+  opacity: 0;
+  transform: translate3d(0, -20vh, 0);
+  animation: confettiFall var(--confetti-duration) linear forwards;
+  animation-delay: var(--confetti-delay);
+}
+
+@keyframes confettiFall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -10vh, 0) rotate(var(--confetti-start-rotate)) scale(var(--confetti-scale));
+  }
+  12% {
+    opacity: 1;
+  }
+  60% {
+    transform: translate3d(calc(var(--confetti-sway) * 0.55), 80vh, 0) rotate(var(--confetti-mid-rotate)) scale(var(--confetti-scale));
+  }
+  88% {
+    opacity: 1;
+    transform: translate3d(calc(var(--confetti-sway) * 0.9), 145vh, 0) rotate(var(--confetti-end-rotate)) scale(var(--confetti-scale));
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--confetti-sway), 380vh, 0) rotate(var(--confetti-end-rotate)) scale(var(--confetti-scale));
+  }
+}
