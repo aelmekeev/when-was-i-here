@@ -32,7 +32,7 @@ export const loadGoogleMaps = () => {
   return mapsPromise;
 };
 
-export const verifyStreetView = async (lat, lng, radius = 50) => {
+export const verifyStreetView = async (lat, lng, radius = 150) => {
   await loadGoogleMaps();
   if (!svService) {
     svService = new window.google.maps.StreetViewService();
@@ -43,11 +43,19 @@ export const verifyStreetView = async (lat, lng, radius = 50) => {
       { location: { lat, lng }, radius, source: window.google.maps.StreetViewSource.OUTDOOR },
       (data, status) => {
         if (status === window.google.maps.StreetViewStatus.OK) {
-          resolve({
-            hasSV: true,
-            lat: data.location.latLng.lat(),
-            lng: data.location.latLng.lng()
-          });
+          // Strict check for Google copyright to filter out third-party indoor photospheres
+          const isOfficial = data.copyright && data.copyright.includes('Google');
+
+          if (isOfficial) {
+            resolve({
+              hasSV: true,
+              lat: data.location.latLng.lat(),
+              lng: data.location.latLng.lng()
+            });
+          } else {
+            // It's a panorama, but not an official Google one (likely an indoor/user photosphere)
+            resolve({ hasSV: false });
+          }
         } else {
           resolve({ hasSV: false });
         }
