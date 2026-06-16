@@ -1,16 +1,42 @@
-# React + Vite
+# When Was I Here?
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+"When Was I Here?" is a privacy-first, client-side web game that turns your Google Maps Timeline history into a geo-guessing game.
 
-Currently, two official plugins are available:
+Ever wondered how well you remember the places you've visited? Simply export your Google Timeline data, upload it to the app, and test your memory. All data processing and gameplay happen completely locally in your browser—your location history never leaves your device!
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Game Modes
 
-## React Compiler
+- **Was I Here?**: Can you accurately recognize whether you've actually been to a location shown on Street View?
+- **Where Am I?**: A classic GeoGuessr-style challenge using only your past locations. Try to pinpoint exactly where you were.
+- **When Was I Here?**: You know where you are, but do you remember *when* you visited? Guess the correct date of your visit.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- **100% Client-Side**: Your Google Timeline export is parsed and filtered locally.
+- **GeoGuessr Export**: Generate a custom map file from your Timeline to play directly on GeoGuessr.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Local Development
+
+### Installation
+
+1. Clone this repository:
+   ```bash
+   git clone git@github.com:aelmekeev/when-was-i-here.git
+   cd when-was-i-here
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open your browser and navigate to `http://localhost:5173` (or the port provided by Vite).
+
+## Running Tests
+
+To run the Vitest test suite:
+```bash
+npm test
+```
