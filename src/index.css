@@ -65,7 +65,7 @@ body::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url('/background.png');
+  background-image: url('./assets/background.png');
   background-size: 100% auto;
   background-repeat: repeat-y;
   background-position: top center;

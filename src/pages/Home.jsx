@@ -169,21 +169,21 @@ export default function Home() {
             'whether',
             'Was I Here?',
             'Can you get higher than 50/50 in recognising if you have been there before?',
-            '/whether.png'
+            `${import.meta.env.BASE_URL}whether.png`
           )}
 
           {renderStep(
             'where',
             'Where Am I?',
             "Try to get as close as you can to the location you've previously been.",
-            '/where.png'
+            `${import.meta.env.BASE_URL}where.png`
           )}
 
           {renderStep(
             'when',
             'When Was I Here?',
             'Try to guess when was the last time you were in the location.',
-            '/when.png'
+            `${import.meta.env.BASE_URL}when.png`
           )}
         </div>
       </section>
