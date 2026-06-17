@@ -28,17 +28,17 @@ export default function Home() {
       alert("No valid session data found.");
       return false;
     }
-    
+
     // We only need the coordinates that have Street View (if we do filtering later) or just keep all.
     // The parse/filter steps in TimelineUploadFlow already do the heavy lifting.
     // Actually, MainContent previously expected SV filtering here, but TimelineUploadFlow's filterPoints 
     // doesn't filter SV. Let's just save the filteredSession and Game.jsx will handle SV checks or we just assume all are game locations.
     // Wait, the original code in MainContent didn't do SV filtering for the demo.
     // Let's just save the session.
-    
+
     localStorage.setItem('session', JSON.stringify(filteredSession));
     setSession(filteredSession);
-    
+
     // Scroll to top when game is ready
     window.scrollTo({ top: 0, behavior: 'smooth' });
     return true;
@@ -69,9 +69,9 @@ export default function Home() {
       alert('We could not start the download.');
     }
   };
-  
+
   const handleDataTakeout = () => {
-    handleGeoguessrTakeout(); // In client-only mode, it's the same data.
+    handleGeoguessrTakeout();
   };
 
   const renderStep = (mode, title, description, iconSrc) => (
@@ -100,19 +100,19 @@ export default function Home() {
           <div>
             <div className={`${common.step} ${common.stepTransparent}`}>
               <h3>Step 1: Export</h3>
-              <svg className={common.stepIcon} xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>
+              <svg className={common.stepIcon} xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z" /></svg>
               <p>Download your Timeline file from the Google Maps app on your phone.</p>
             </div>
 
             <div className={`${common.step} ${common.stepTransparent}`}>
               <h3>Step 2: Upload</h3>
-              <svg className={common.stepIcon} xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="M440-200h80v-167l64 64 56-57-160-160-160 160 57 56 63-63v167ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z"/></svg>
+              <svg className={common.stepIcon} xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="M440-200h80v-167l64 64 56-57-160-160-160 160 57 56 63-63v167ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z" /></svg>
               <p>Your browser processes your file locally and keeps just the locations needed for the game.</p>
             </div>
 
             <div className={`${common.step} ${common.stepTransparent}`}>
               <h3>Step 3: Play</h3>
-              <svg className={common.stepIcon} xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q146 0 255.5 91.5T872-559h-82q-19-73-68.5-130.5T600-776v16q0 33-23.5 56.5T520-680h-80v80q0 17-11.5 28.5T400-560h-80v80h80v120h-40L168-552q-3 18-5.5 36t-2.5 36q0 131 92 225t228 95v80Zm364-20L716-228q-21 12-45 20t-51 8q-75 0-127.5-52.5T440-380q0-75 52.5-127.5T620-560q75 0 127.5 52.5T800-380q0 27-8 51t-20 45l128 128-56 56ZM620-280q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Z"/></svg>
+              <svg className={common.stepIcon} xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q146 0 255.5 91.5T872-559h-82q-19-73-68.5-130.5T600-776v16q0 33-23.5 56.5T520-680h-80v80q0 17-11.5 28.5T400-560h-80v80h80v120h-40L168-552q-3 18-5.5 36t-2.5 36q0 131 92 225t228 95v80Zm364-20L716-228q-21 12-45 20t-51 8q-75 0-127.5-52.5T440-380q0-75 52.5-127.5T620-560q75 0 127.5 52.5T800-380q0 27-8 51t-20 45l128 128-56 56ZM620-280q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Z" /></svg>
               <p>Test your memory of places you've visited, directly in your browser.</p>
             </div>
           </div>
@@ -127,7 +127,7 @@ export default function Home() {
             >
               Try Demo Round
             </button>
-            <span style={{margin: "0 10px"}}>or</span>
+            <span style={{ margin: "0 10px" }}>or</span>
             <TimelineUploadFlow
               inputId="timeline-upload"
               buttonClassName={`${common.button} ${common.buttonHighlight}`}
@@ -149,7 +149,7 @@ export default function Home() {
             <TimelineHelpModal onClose={() => setShowTimelineModal(false)} />
           )}
         </section>
-        
+
         <FAQSection extendedVersion={false} />
       </div>
     );
@@ -217,12 +217,12 @@ export default function Home() {
           </button>
         </p>
 
-        <p className={common.actionLinks} style={{marginTop: "20px"}}>
+        <p className={common.actionLinks} style={{ marginTop: "20px" }}>
           <a href="#" onClick={(e) => { e.preventDefault(); setShowTimelineModal(true); }}>
             How do I export my Timeline file?
           </a>
         </p>
-        
+
         {showTimelineModal && (
           <TimelineHelpModal onClose={() => setShowTimelineModal(false)} />
         )}
