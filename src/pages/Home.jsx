@@ -11,6 +11,63 @@ export default function Home() {
   const [session, setSession] = useState(null);
   const [showTimelineModal, setShowTimelineModal] = useState(false);
   const uploadBtnRef = useRef(null);
+  const [ignoreNearby, setIgnoreNearby] = useState(false);
+  const [userLocation, setUserLocation] = useState(null);
+  const [isLocating, setIsLocating] = useState(false);
+
+  const handleIgnoreNearbyChange = (e) => {
+    const checked = e.target.checked;
+    localStorage.setItem('ignoreNearbyPref', checked);
+    if (checked) {
+      if (!navigator.geolocation) {
+        alert("Geolocation is not supported by your browser");
+        return;
+      }
+      setIsLocating(true);
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          });
+          setIgnoreNearby(true);
+          setIsLocating(false);
+        },
+        (error) => {
+          alert("Unable to retrieve your location: " + error.message);
+          setIgnoreNearby(false);
+          setIsLocating(false);
+        }
+      );
+    } else {
+      setIgnoreNearby(false);
+      setUserLocation(null);
+    }
+  };
+
+  useEffect(() => {
+    const pref = localStorage.getItem('ignoreNearbyPref') === 'true';
+    if (pref) {
+      setIgnoreNearby(true);
+      if (navigator.geolocation) {
+        setIsLocating(true);
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setUserLocation({
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            });
+            setIsLocating(false);
+          },
+          (error) => {
+            console.error("Unable to retrieve your location:", error);
+            setIgnoreNearby(false);
+            setIsLocating(false);
+          }
+        );
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const storedSession = localStorage.getItem('session');
@@ -74,18 +131,31 @@ export default function Home() {
     handleGeoguessrTakeout();
   };
 
-  const renderStep = (mode, title, description, iconSrc) => (
-    <Link
-      to={`/game?mode=${mode}`}
-      className={styles.stepLink}
-    >
-      <div className={`${common.step} ${common.interactiveStep}`}>
-        <h3>{title}</h3>
-        <img className={common.stepIcon} src={iconSrc} alt={title} />
-        <p>{description}</p>
-      </div>
-    </Link>
-  );
+  const renderStep = (mode, title, description, iconSrc) => {
+    let toPath = `/game?mode=${mode}`;
+    if (ignoreNearby && userLocation) {
+      toPath += `&ignoreNearby=true&lat=${userLocation.lat}&lng=${userLocation.lng}`;
+    }
+
+    return (
+      <Link
+        to={toPath}
+        className={styles.stepLink}
+        onClick={(e) => {
+          if (isLocating) {
+            e.preventDefault();
+            alert("Still getting your location, please wait...");
+          }
+        }}
+      >
+        <div className={`${common.step} ${common.interactiveStep}`}>
+          <h3>{title}</h3>
+          <img className={common.stepIcon} src={iconSrc} alt={title} />
+          <p>{description}</p>
+        </div>
+      </Link>
+    );
+  };
 
   if (!session) {
     return (
@@ -185,6 +255,21 @@ export default function Home() {
             'Try to guess when was the last time you were in the location.',
             `${import.meta.env.BASE_URL}when.png`
           )}
+        </div>
+        <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
+          <label 
+            title="We will request your current location and exclude any game locations within 50km."
+            style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+          >
+            <input 
+              type="checkbox" 
+              checked={ignoreNearby}
+              onChange={handleIgnoreNearbyChange}
+              disabled={isLocating}
+              style={{ marginRight: '10px', width: '16px', height: '16px', cursor: 'pointer' }}
+            />
+            {isLocating ? 'Locating you...' : 'Exclude nearby locations'}
+          </label>
         </div>
       </section>
 

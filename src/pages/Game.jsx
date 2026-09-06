@@ -7,6 +7,7 @@ import * as whereMode from '../modes/where.jsx';
 import * as wasIHereMode from '../modes/whether.jsx';
 import * as whenMode from '../modes/when.jsx';
 import { getCountryFromCoords } from '../utils/summary';
+import { computeDistanceKm } from '../utils/distance';
 import Confetti from '../components/Confetti';
 
 const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
@@ -193,8 +194,24 @@ export default function Game() {
         return;
       }
 
+      const params = new URLSearchParams(location.search);
+      const ignoreNearbyParam = params.get('ignoreNearby') === 'true';
+      const latParam = parseFloat(params.get('lat'));
+      const lngParam = parseFloat(params.get('lng'));
+
+      if (ignoreNearbyParam && !isNaN(latParam) && !isNaN(lngParam) && !demoMode) {
+        coordinates = coordinates.filter(c => {
+          const dist = computeDistanceKm(c.lat, c.lng, latParam, lngParam);
+          return dist >= 50;
+        });
+      }
+
       if (!coordinates.length) {
-        alert('No coordinates found in session.');
+        if (ignoreNearbyParam) {
+          alert('No locations found outside your current area (~50km). Try playing without the filter.');
+        } else {
+          alert('No coordinates found in session.');
+        }
         navigate('/');
         return;
       }
