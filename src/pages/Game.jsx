@@ -345,16 +345,32 @@ export default function Game() {
     let loc, index;
 
     while (!valid) {
-      if (previousIndexes.length >= allLocations.length) {
+      const availableIndexes = [];
+      for (let i = 0; i < allLocations.length; i++) {
+        if (!previousIndexes.includes(i)) {
+          availableIndexes.push(i);
+        }
+      }
+
+      if (availableIndexes.length === 0) {
         alert("We ran out of valid locations with Street View coverage!");
         navigate('/');
         return;
       }
 
-      do {
-        index = Math.floor(Math.random() * allLocations.length);
-      } while (previousIndexes.includes(index));
+      const unverifiedIndexes = availableIndexes.filter(i => allLocations[i].svVerified === undefined);
+      
+      let candidatePool = unverifiedIndexes;
+      if (candidatePool.length === 0) {
+        candidatePool = availableIndexes.filter(i => allLocations[i].svVerified === true);
+      }
 
+      if (candidatePool.length === 0) {
+        previousIndexes.push(...availableIndexes);
+        continue;
+      }
+
+      index = candidatePool[Math.floor(Math.random() * candidatePool.length)];
       loc = allLocations[index];
 
       if (demoMode) {
